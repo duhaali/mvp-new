@@ -35,7 +35,9 @@ class Signin extends React.Component {
 
   render() {
     return (
+
       <div>
+      
         Username:
         <input name="userName" onChange={this.usernameChange.bind(this)}/>
         Password:

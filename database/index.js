@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/db');
+mongoose.connect('mongodb://localhost/db', {
+  useMongoClient: true,});
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -18,6 +20,7 @@ var booksSchema = mongoose.Schema({
 
 var User = mongoose.model('User', usersSchema);
 var Book = mongoose.model('Book', booksSchema);
+
 
 
 exports.User = User;

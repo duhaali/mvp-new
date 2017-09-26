@@ -9,11 +9,30 @@ var app = express();
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(morgan('dev'));
-app.use(parser.urlencoded());
+app.use(parser.urlencoded({extended : false}));
 
-app.get('/', function(req,res) {
-	res.send('sssssssssss');
-});
+
+// app.get('/', function(req,res) {
+//   db.find({},function(err,res){
+//     if(err)
+//     {res.send(res);}
+//   })
+// 	res.send(res);
+// });
+
+app.post('/', function(req, res) {
+  console.log(req.body);
+  var newBook = db.Book({
+    author: req.body.author,
+    title: req.body.title
+  });
+  newBook.save(function(err) {
+    if (err) {
+      console.log(err);
+    }
+  });
+  res.render('/');
+})
 
 app.post('/', function(req, res) {
   console.log(req.body);
@@ -26,11 +45,14 @@ app.post('/', function(req, res) {
   	  console.log(err);
   	}
   });
-  res.redirect('/');
+  res.render('/');
 })
 
+
+
+
 app.listen(3000, function() {
-  console.log(`teneh el7azenh`);
+  console.log(`the server work`);
 });
 
 
